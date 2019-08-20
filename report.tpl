@@ -1,3 +1,10 @@
+{# Sources: #}
+{# https://github.com/distillpub/template/blob/master/examples/article.html #}
+{# licensed under Apache 2.0 #}
+{# and #}
+{# https://github.com/jupyter/nbconvert/blob/master/nbconvert/templates/html/full.tpl #}
+{# licensed under Modified BSD License #}
+
 {%- extends 'basic.tpl' -%}
 {% from 'mathjax.tpl' import mathjax %}
 
@@ -48,6 +55,7 @@
   {% set nb_authors = nb.metadata.get('authors', '') %}
   {% set nb_title = nb.metadata.get('title', '')  %}
   {% set nb_abstract = nb.metadata.get('abstract', '') %}
+  {% set nb_bib = nb.metadata.get('bibfile', '') %}
   <body>
     <d-front-matter>
       <script id="distill-front-matter" type="text/json">{
@@ -63,7 +71,7 @@
       {{ super() }}
     </d-article>
     <d-appendix>
-      <d-bibliography src="refs.bib"></d-bibliography>
+      <d-bibliography src="{{ nb_bib }}"></d-bibliography>
     </d-appendix>
   </body>
 {%- endblock body %}
@@ -88,10 +96,6 @@
 {% block error -%}{%- endblock error %}
 {% block stream_stdout -%}{%- endblock stream_stdout %}
 {% block stream_stderr -%}{%- endblock stream_stderr %}
-
-{% block execute_result -%}
-  {{ super() }}
-{%- endblock execute_result %}
 
 {% block markdowncell scoped %}
   {% if 'only_md' in cell.metadata.get('tags', []) %}
