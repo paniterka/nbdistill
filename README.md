@@ -1,2 +1,3 @@
 # nbdistill
-NBConvert a Jupyter Notebook into a Distill.pub article
+
+The files `article.html`, `article.ipynb`, and `report.tpl` are most interesting.  To see the end product, download `article.html` and open it locally.
